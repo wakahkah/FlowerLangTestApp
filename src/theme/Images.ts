@@ -15,7 +15,8 @@ export default function ({}: ThemeVariables) {
     icons: {
       colors: require('./assets/images/colorswatch.png'),
       send: require('./assets/images/send.png'),
-      translate: require('./assets/images/translate.png'),
+      translate: require('./assets/images/translation.png'),
+      back: require('./assets/images/arrow-left.png'),
     },
   };
 }
