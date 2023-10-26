@@ -50,7 +50,7 @@ const FlowerLangList = ({ navigation }: HomeScreenProps) => {
     });
 
     useEffect(() => {
-        console.log('data', data);
+        //console.log('data', data);
         if (isSuccess && data?.data) {
             setFlowerLangListData(data?.data);
         }
