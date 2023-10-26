@@ -1,8 +1,7 @@
-import { api } from '../../api';
+import {api} from '../../api';
 
 export type User = {
-  id: number;
-  name: string;
+  id: number; name: string;
 };
 
 export const userApi = api.injectEndpoints({
@@ -14,4 +13,4 @@ export const userApi = api.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useLazyFetchOneQuery } = userApi;
+export const {useLazyFetchOneQuery} = userApi;
