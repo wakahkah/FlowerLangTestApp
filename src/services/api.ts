@@ -1,21 +1,29 @@
-import {BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError,} from '@reduxjs/toolkit/query/react';
+import {
+    BaseQueryFn,
+    createApi,
+    FetchArgs,
+    fetchBaseQuery,
+    FetchBaseQueryError,
+} from '@reduxjs/toolkit/query/react';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.API_URL,
+    baseUrl: process.env.API_URL,
 });
 
-const baseQueryWithInterceptor:
-    BaseQueryFn<string|FetchArgs, unknown, FetchBaseQueryError> =
-        async (args, api, extraOptions) => {
-      let result = await baseQuery(args, api, extraOptions);
-      // console.log('result', result);
-      if (result.error && result.error.status === 401) {
-      }
-      return result;
-    };
+const baseQueryWithInterceptor: BaseQueryFn<
+    string | FetchArgs,
+    unknown,
+    FetchBaseQueryError
+> = async (args, api, extraOptions) => {
+    let result = await baseQuery(args, api, extraOptions);
+    // console.log('result', result);
+    if (result.error && result.error.status === 401) {
+    }
+    return result;
+};
 
 export const api = createApi({
-  reducerPath: 'flower-lang-api',
-  baseQuery: baseQueryWithInterceptor,
-  endpoints: () => ({}),
+    reducerPath: 'flower-lang-api',
+    baseQuery: baseQueryWithInterceptor,
+    endpoints: () => ({}),
 });
