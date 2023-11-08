@@ -9,6 +9,8 @@ import {
   ImageBackground,
 } from 'react-native';
 import { MainParamsList } from 'types/navigation';
+import crashlytics from '@react-native-firebase/crashlytics';
+import analytics from '@react-native-firebase/analytics';
 
 interface Props {
   title: string;
@@ -23,7 +25,23 @@ const GridItem = (props: Props) => {
       <Pressable
         style={style.button}
         android_ripple={{ color: '#ccc' }}
-        onPress={() => props.nav.push('Details', { data: props.data })}
+        onPress={async () => {
+          try {
+            await analytics().logEvent('details', props.data);
+            crashlytics().log(`Click Details: ${props.data.name}`);
+            if (props.data.name.includes(' ')) {
+              throw new Error('Name cannot contain spaces');
+            }
+            return props.nav.push('Details', { data: props.data });
+          } catch (error) {
+            if (error instanceof Error) {
+              crashlytics().recordError(error);
+              console.log('crashlytics error');
+            } else {
+              console.log(error);
+            }
+          }
+        }}
       >
         {({ pressed }) => (
           <ImageBackground
