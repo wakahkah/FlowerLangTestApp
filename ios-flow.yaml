@@ -1,0 +1,14 @@
+# flow.yaml
+
+appId: org.reactjs.native.example.TestApp
+---
+- launchApp
+- extendedWaitUntil:
+    visible: "Abatina" # or any other selector
+    timeout: 100000
+- tapOn:
+    point: "86%,10%"
+- assertVisible: "Bienvenue sur"
+- tapOn:
+    point: "86%,10%"
+- assertVisible: "Flower Lang"
